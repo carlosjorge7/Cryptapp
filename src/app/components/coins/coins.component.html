@@ -1,0 +1,52 @@
+<div class="container">
+  <br>
+  <input type="text" class="form-control" placeholder="Buscar por nombre" (change)="buscarCoin($event)" /> 
+    <div class="row">
+      <div class="col-xs-12">
+        <br>
+        <div *ngIf="!loading" class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Moneda</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">24h</th>
+                  <th scope="col">Vol. 24 h</th>
+                  <th scope="col">Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let coin of coins | filterCoin: textoBuscar; let i = index;" [routerLink]="['/coin/' + coin.id]">
+                    <td>{{ i+ 1}}</td>
+                    <td>
+                      <img [src]="coin.image"
+                        style="width: 2.5rem"
+                        class="img-fluid me-4"
+                      />
+                      <span>{{ coin.name }}</span>
+                      <span class="ms-3 text-muted text-uppercase">{{ coin.symbol }}</span>
+                    </td>
+                    <td>{{ coin.current_price.toLocaleString() + '€'}}</td>
+        
+                    <td
+                      [ngClass]="
+                        coin.price_change_percentage_24h > 0
+                          ? 'text-success'
+                          : 'text-danger'
+                      "
+                    >
+                    {{ coin.price_change_percentage_24h.toString().substring(0, 4).replace('.', ',') + '%' }}
+                    </td>
+                    <td>{{ coin.total_volume.toLocaleString() }}</td>
+                    <td><i [routerLink]="['/coin/' + coin.id]" class="far fa-eye"></i></td>
+                  </tr>
+              </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,40 @@
+<button routerLink="/coins" class="btn btn-success">
+  <i class="fas fa-arrow-left"></i> anterior
+</button>
+<div class="card text-center">
+    <!--Spinner-->
+    <br>
+    <div *ngIf="!loading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="card-header">
+      <img [src]="coinDetail.image.small">
+      {{coinDetail.name }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Precio {{ coinDetail.market_data.current_price.eur + ' Eur'}}</h5>
+      <p class="card-text">24h {{ coinDetail.market_data.price_change_percentage_24h_in_currency.eur + ' %'}}</p>
+      <p class="card-text"> Minimo de hoy {{ coinDetail.market_data.low_24h.eur + 'Eur'}}</p>
+      <p class="card-text"> Máximo de hoy {{ coinDetail.market_data.high_24h.eur + 'Eur'}}</p>
+      <p class="card-text">Cap. de mercado {{ coinDetail.market_data.market_cap.eur }}</p>
+      <p class="card-text">Vol. 24 h {{ coinDetail.market_data.total_volume.eur }}</p>
+      <p class="card-text">Valoración tras la dilución total {{ coinDetail.market_data.fully_diluted_valuation.eur }}</p>
+      <p class="card-text">Cantidad circulante {{ coinDetail.market_data.circulating_supply }}</p>
+      <p class="card-text">Total Supply {{ coinDetail.market_data.total_supply }}</p>
+      <p class="card-text">Cantidad máxima {{ coinDetail.market_data.max_supply }}</p>
+    </div>
+    <div class="card-footer text-muted">
+      {{ coinDetail.symbol }}
+    </div>
+</div>
+
+<div class="card text-center">
+  <!-- <div *ngIf="!loadingChart" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div> -->
+  <canvas id="coinsChart"></canvas>
+</div>
